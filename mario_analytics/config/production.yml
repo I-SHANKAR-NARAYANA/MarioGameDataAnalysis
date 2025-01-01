@@ -1,0 +1,44 @@
+# Mario Analytics Production Configuration
+# Optimized for Electronic Arts deployment standards
+
+database:
+  host: ${DB_HOST:-localhost}
+  port: ${DB_PORT:-5432}
+  name: mario_analytics_prod
+  user: ${DB_USER:-mario}
+  password: ${DB_PASSWORD:-supersecret}
+  pool_size: 20
+  max_overflow: 30
+
+redis:
+  host: ${REDIS_HOST:-localhost}
+  port: ${REDIS_PORT:-6379}
+  db: 0
+  connection_pool_size: 50
+
+api:
+  host: 0.0.0.0
+  port: 5000
+  workers: 4
+  timeout: 30
+  max_requests: 1000
+
+analytics:
+  batch_processing_interval: 300  # 5 minutes
+  model_retrain_frequency: 86400  # 24 hours
+  data_retention_days: 365
+  
+monitoring:
+  enable_metrics: true
+  log_level: INFO
+  performance_tracking: true
+  
+ab_testing:
+  default_confidence_level: 0.95
+  minimum_sample_size: 1000
+  max_concurrent_experiments: 5
+
+security:
+  api_rate_limit: 1000  # requests per hour
+  enable_cors: true
+  jwt_secret: ${JWT_SECRET}
